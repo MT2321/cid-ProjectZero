@@ -1,3 +1,9 @@
+"""
+SimiLab.py
+====================================
+The core module of my example project
+"""
+
 '''   Clase
 - Recibe las matrices
 - Recibe el vocabulario (dict)
@@ -22,77 +28,78 @@ def validate(matrixes, vocabulary, yearDict):
         success = False
     if matrixes
 '''
+    
 class tempName:
     def __init__(self, matrixes, yearDict, vocabulary):
-        self.matrixes = matrixes    # matrices de probabilidad de coocurrencia por year
-        self.yearDict = yearDict    # diccionario que vincula year con indice en matrixes
         self.vocabulary = vocabulary # vocabulario utilizado para generar las matrices
         self.inverseVocab = dict(map(reversed, vocabulary.items())) # diccionario inverso del vocabulario
+        print(self.inverseVocab)
+        self.matrixes = matrixes    # matrices de probabilidad de coocurrencia por year
+        self.yearDict = yearDict    # diccionario que vincula year con indice en matrixes
 
-
-    
     def findSimilars(self, vector, threshold, year):
-    """
-    Finds the most similar words within a word2vec embedding matrix.
-    This function computes the cosine similarities between embedding vectors
-    and a given vector. Returning the most similar words within a given treshold.
-    
-    Parameters
-    --------
-    vector : array_like
-            Input Vector. Must match embedding dimension.
-    threshold : float, int
-                * float: minimun cosine similaritie allowed to consider a word 'close' to the given vector.
-                * int: amount of near words to search. 
-    year : int
-           Choosen year.
-    
-    Returns
-    -------
-    out : dict
-        A dictionary containing the words found and its
-        cosine similarities with respect to given input vector.
-    Raises
-    ------
-    ValueError
-        if 'treshold' is a negative floating point number.
-    See Also
-    --------
-    numpy.fft : for definition of the DFT and conventions used.
-    ifft : The inverse of `fft`.
-    fft2 : The two-dimensional FFT.
-    fftn : The *n*-dimensional FFT.
-    rfftn : The *n*-dimensional FFT of real input.
-    fftfreq : Frequency bins for given FFT parameters.
-    Notes
-    -----
-    FFT (Fast Fourier Transform) refers to a way the discrete Fourier
-    Transform (DFT) can be calculated efficiently, by using symmetries in the
-    calculated terms.  The symmetry is highest when `n` is a power of 2, and
-    the transform is therefore most efficient for these sizes.
-    The DFT is defined, with the conventions used in this implementation, in
-    the documentation for the `numpy.fft` module
+        """
+        Finds the most similar words within a word2vec embedding matrix.
+        This function computes the cosine similarities between embedding vectors
+        and a given vector. Returning the most similar words within a given treshold.
+        
+        Parameters
+        --------
+        vector : array_like
+                Input Vector. Must match embedding dimension.
+        threshold : float, int
+                    * float: minimun cosine similaritie allowed to consider a word 'close' to the given vector.
+                    * int: amount of near words to search. 
+        year : int
+            Choosen year.
+        
+        Returns
+        -------
+        out : dict
+            A dictionary containing the words found and its
+            cosine similarities with respect to given input vector.
+        Raises
+        ------
+        ValueError
+            if 'treshold' is a negative floating point number.
+        See Also
+        --------
+        numpy.fft : for definition of the DFT and conventions used.
+        ifft : The inverse of `fft`.
+        fft2 : The two-dimensional FFT.
+        fftn : The *n*-dimensional FFT.
+        rfftn : The *n*-dimensional FFT of real input.
+        fftfreq : Frequency bins for given FFT parameters.
+        Notes
+        -----
+        FFT (Fast Fourier Transform) refers to a way the discrete Fourier
+        Transform (DFT) can be calculated efficiently, by using symmetries in the
+        calculated terms.  The symmetry is highest when `n` is a power of 2, and
+        the transform is therefore most efficient for these sizes.
+        The DFT is defined, with the conventions used in this implementation, in
+        the documentation for the `numpy.fft` module
 
-    Examples
-    --------
-    >>> ma = [[-1,-2,-3],[4,5,6],[7,8,9]]
-    >>> mb = [[1,2.1,3],[4.2,4.8,6],[7.02,8,9.3]]
-    >>> mc = [[1.1,2.2,3.1],[4.23,5,6],[7.03,8,9.32]]
+        Examples
+        --------
+        >>> ma = [[-1,-2,-3],[4,5,6],[7,8,9]]
+        >>> mb = [[1,2.1,3],[4.2,4.8,6],[7.02,8,9.3]]
+        >>> mc = [[1.1,2.2,3.1],[4.23,5,6],[7.03,8,9.32]]
 
-    >>> matrixes = [ma, mb, mc]
-    >>> yearDict = {1990:0, 1991:1, 1995:2}
-    >>> vocabulary = {'martin':0, 'pablo':1, 'carlos':2}
+        >>> matrixes = [ma, mb, mc]
+        >>> yearDict = {1990:0, 1991:1, 1995:2}
+        >>> vocabulary = {'martin':0, 'pablo':1, 'carlos':2}
 
-    >>> tempObject = tempName(matrixes, yearDict, vocabulary)
+        >>> tempObject = tempName(matrixes, yearDict, vocabulary)
 
-    >>> newVec = tempObject.findSimilars([1,2,3], 3, 1990)
+        >>> newVec = tempObject.findSimilars([1,2,3], 3, 1990)
 
-    >>> print(newVec)
+        >>> print(newVec)
 
-    {0: 'martin', 1: 'pablo', 2: 'carlos'}
-    {'pablo': 0.9746318461970761, 'carlos': 0.9594119455666702, 'martin': -1.0}
-    """
-    if threshold > 0:
+        {0: 'martin', 1: 'pablo', 2: 'carlos'}
+        {'pablo': 0.9746318461970761, 'carlos': 0.9594119455666702, 'martin': -1.0}
+        
+        """
+        if threshold > 0:
             tempMat = self.matrixes[self.yearDict[year]] # obtengo la matriz del anio pedido
             results = {} # container para los resultados encontrados dict{string, sim}
             # np.transpose(tempMat) si la palabra es la columna
@@ -143,16 +150,16 @@ class tempName:
         evolution = []
         return evolution
 
-ma = [[-1,-2,-3],[4,5,6],[7,8,9]]
-mb = [[1,2.1,3],[4.2,4.8,6],[7.02,8,9.3]]
-mc = [[1.1,2.2,3.1],[4.23,5,6],[7.03,8,9.32]]
+# ma = [[-1,-2,-3],[4,5,6],[7,8,9]]
+# mb = [[1,2.1,3],[4.2,4.8,6],[7.02,8,9.3]]
+# mc = [[1.1,2.2,3.1],[4.23,5,6],[7.03,8,9.32]]
 
-matrixes = [ma, mb, mc]
-yearDict = {1990:0, 1991:1, 1995:2}
-vocabulary = {'martin':0, 'pablo':1, 'carlos':2}
+# matrixes = [ma, mb, mc]
+# yearDict = {1990:0, 1991:1, 1995:2}
+# vocabulary = {'martin':0, 'pablo':1, 'carlos':2}
 
-tempObject = tempName(matrixes, yearDict, vocabulary)
+# tempObject = tempName(matrixes, yearDict, vocabulary)
 
-newVec = tempObject.findSimilars([1,2,3], 3, 1990)
+# newVec = tempObject.findSimilars([1,2,3], 3, 1990)
 
-print(newVec)
+# print(newVec)
