@@ -22,23 +22,24 @@ class tempName:
 
     def findSimilar(self, vector, threshold, year):
         tempMat = self.matrixes[self.yearDict[year]] # obtengo la matriz del anio pedido
-        results = [] # container para los resultados encontrados (strings)
+        results = {} # container para los resultados encontrados dict{string, sim}
         # np.transpose(tempMat) si la palabra es la columna
         if type(threshold) is float:
             for index, word in enumerate(tempMat): # ASUMIENDO QUE LA PALABRA ES LA FILA!!!
                 cosSim = 1 - spatial.distance.cosine(vector, word) # se obtiene la similitud coseno entre word y vector
                 if cosSim > threshold: # si la similitud coseno cae dentro del threshold dado
-                    results.append(self.inverseVocab[index]) # se guarda en results la palabra encontrada
+                    results[ self.inverseVocab[index] ] = cosSim # se guarda en results la palabra encontrada
         elif type(threshold) is int:
             similarities = []
             for index, word in enumerate(tempMat): # ASUMIENDO QUE LA PALABRA ES LA FILA!!!
                 cosSim = 1 - spatial.distance.cosine(vector, word) # se obtiene la similitud coseno entre word y vector
-                similarities.append([index, cosSim])
-            # se busca por cantidad
-        
-        resultados = {} # diccionario con las palabras encontradas y su sim-cos respecto de la ingresada
+                similarities.append([index, cosSim]) # se guarda en similarities una lista de elementos [indice, similitud]
+            similarities.sort(key=lambda elem: elem[1], reverse=True) # se ordena la lista de mayor a menor similitud
+            mostSimilar = similarities[0:threshold] # se guardan en mostSimilar los 'threshold' elementos con mayor similitud
+            for index, cosSim in mostSimilar:
+                results[ self.inverseVocab[index] ] = cosSim
 
-        return resultados
+        return results
 
     def histSimilar(self, vector, threshold):
         histograma = []
