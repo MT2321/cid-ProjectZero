@@ -1,7 +1,7 @@
 """
 SimiLab.py
 ====================================
-The core module of my example project
+The core module of this NLP package! 
 """
 
 '''   Clase
@@ -30,6 +30,11 @@ def validate(matrixes, vocabulary, yearDict):
 '''
     
 class tempName:
+    """
+    This class will allow you to track how words changes across time 
+    using embedding matrices of a given corpus. These matrices should be aligned with
+    Procrustes.
+     """
     def __init__(self, matrixes, yearDict, vocabulary):
         self.vocabulary = vocabulary # vocabulario utilizado para generar las matrices
         self.inverseVocab = dict(map(reversed, vocabulary.items())) # diccionario inverso del vocabulario
@@ -92,11 +97,11 @@ class tempName:
         >>> tempObject = tempName(matrixes, yearDict, vocabulary)
 
         >>> newVec = tempObject.findSimilars([1,2,3], 3, 1990)
-
+        
         >>> print(newVec)
 
-        {0: 'martin', 1: 'pablo', 2: 'carlos'}
-        {'pablo': 0.9746318461970761, 'carlos': 0.9594119455666702, 'martin': -1.0}
+        >>> {0: 'martin', 1: 'pablo', 2: 'carlos'}
+        >>> {'pablo': 0.9746318461970761, 'carlos': 0.9594119455666702, 'martin': -1.0}
         
         """
         if threshold > 0:
