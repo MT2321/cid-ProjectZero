@@ -13,7 +13,7 @@
 import os
 import sys
 #sys.path.insert(0, os.path.abspath('C:/Users/RA/Documents/GitHub/cid-ProjectZero/paquete'))
-sys.path.insert(0, os.path.abspath('classPackg\SimiLab.py'))
+sys.path.insert(0, os.path.abspath('../classPackg/SimiLab.py'))
 
 # -- Project information -----------------------------------------------------
 
