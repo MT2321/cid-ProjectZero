@@ -20,6 +20,7 @@ sys.path.insert(0, os.path.abspath('classPackg\SimiLab.py'))
 project = 'CLASEHTML'
 copyright = '2019, p y m'
 author = 'p y m'
+master_doc = 'index'
 
 
 # -- General configuration ---------------------------------------------------
